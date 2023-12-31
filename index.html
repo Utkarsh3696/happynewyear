@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Happy new year</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Bebas Neue', sans-serif;
+            ;
+            
+        }
+
+        .main {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+
+
+            width: 300px;
+            height: 400px;
+            margin: 0px 10px 0px 50px;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            border: none;
+
+
+
+        }
+
+        .card label input button {
+            margin: 100px;
+            color: aqua;
+        }
+
+        .inner {
+            margin: 70px 10px 0px 10px;
+            gap: 10px;
+        }
+
+        input {
+            padding: 10px;
+            background-color: transparent;
+            border-radius: 10px;
+            color: black;
+            width: 100%;
+            text-align: center;
+            font-size: 20px;
+
+        }
+
+        #btn {
+            padding: 10px;
+            background-color: red;
+            border-radius: 10px;
+            width: 100%;
+            color: antiquewhite;
+            box-shadow:
+                5px 5px 7px rgb(0 0 0/ .11),
+                10px 10px 15px rgb(0 0 0/ .11),
+                50px 50px 60px rgb(0 0 0/ .11);
+            transition: transform .3s ease;
+            gap: 1rem;
+            text-align: center;
+            align-items: center;
+            font-size: 20px;
+            margin-left: 3px;
+        }
+
+        #btn:active {
+            transform: scale(.9);
+
+        }
+
+        #wish {
+            margin: 100px 0px 0px 10px;
+            text-align: center;
+
+        }
+
+        #name_wish {
+            margin: 10px 0px 0px 40px;
+            font-size: 50px;
+            color: rgb(253, 118, 8);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="wish">
+        <h1 id="name_wish"></h1>
+    </div>
+    <div class="main">
+
+        <div class="card">
+            <div class="inner">
+                <label for="name"> Enter Your Name</label>
+                <br> <br>
+
+                <input type="text" id='name' required>
+                <br>
+                <br>
+                <button id='btn'>
+                    <span>🎉🎉</span>
+                    <span>Happy New Year</span>
+                    <span>🎉🎉</span>
+                </button>
+
+            </div>
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+        <script>
+            const btn = document.getElementById('btn');
+
+            btn.addEventListener('click', () => {
+                confetti({
+                    particleCount: 500,
+                    sprade: 70000,
+                    origin: { y: .6 }
+
+                });
+                show()
+                console.log("hey")
+                // play()
+                var set = setTimeout(play(), 90000)
+
+                var dis = document.getElementById('div');
+                dis.style.display = "block";
+                alert("make a goal list")
+
+
+            })
+
+            function show() {
+
+                var naem = document.getElementById('name').value;
+                if (naem == null || naem == ' ') {
+                    alert("please enter your name first")
+                }
+                else {
+                    document.getElementById('name_wish').innerHTML = `Happy new year my dear ${naem} `
+                }
+            }
+            function play() {
+                var aduio = new Audio('hny.mp3');
+                aduio.play()
+
+
+
+            }
+
+            window.onload = () => {
+                const form1 = document.querySelector("#addForm");
+
+                let items = document.getElementById("items");
+                let submit = document.getElementById("submit");
+
+                let editItem = null;
+
+                form1.addEventListener("submit", addItem);
+                items.addEventListener("click", removeItem);
+            };
+
+            function addItem(e) {
+                e.preventDefault();
+
+                if (submit.value != "Submit") {
+                    console.log("Hello");
+
+                    editItem.target.parentNode.childNodes[0].data
+                        = document.getElementById("item").value;
+
+                    submit.value = "Submit";
+                    document.getElementById("item").value = "";
+
+                    document.getElementById("lblsuccess").innerHTML
+                        = "Text edited successfully";
+
+                    document.getElementById("lblsuccess")
+                        .style.display = "block";
+
+                    setTimeout(function () {
+                        document.getElementById("lblsuccess")
+                            .style.display = "none";
+                    }, 3000);
+
+                    return false;
+                }
+
+                let newItem = document.getElementById("item").value;
+                if (newItem.trim() == "" || newItem.trim() == null)
+                    return false;
+                else
+                    document.getElementById("item").value = "";
+
+                let li = document.createElement("li");
+                li.className = "list-group-item";
+
+                let deleteButton = document.createElement("button");
+
+                deleteButton.className =
+                    "btn-danger btn btn-sm float-right delete";
+
+                deleteButton.appendChild(document.createTextNode("Delete"));
+
+                let editButton = document.createElement("button");
+
+                editButton.className =
+                    "btn-success btn btn-sm float-right edit";
+
+                editButton.appendChild(document.createTextNode("Edit"));
+
+                li.appendChild(document.createTextNode(newItem));
+                li.appendChild(deleteButton);
+                li.appendChild(editButton);
+
+                items.appendChild(li);
+            }
+
+            function removeItem(e) {
+                e.preventDefault();
+                if (e.target.classList.contains("delete")) {
+                    if (confirm("Are you Sure?")) {
+                        let li = e.target.parentNode;
+                        items.removeChild(li);
+                        document.getElementById("lblsuccess").innerHTML
+                            = "Text deleted successfully";
+
+                        document.getElementById("lblsuccess")
+                            .style.display = "block";
+
+                        setTimeout(function () {
+                            document.getElementById("lblsuccess")
+                                .style.display = "none";
+                        }, 3000);
+                    }
+                }
+                if (e.target.classList.contains("edit")) {
+                    document.getElementById("item").value =
+                        e.target.parentNode.childNodes[0].data;
+                    submit.value = "EDIT";
+                    editItem = e;
+                }
+            }
+
+            function toggleButton(ref, btnID) {
+                document.getElementById(btnID).disabled = false;
+            }
+
+
+        </script>
+    </div>
+
+    <div class="container mt-3" id='div' style="display: none;">
+        <h2>My 2024 Goals</h2>
+
+        <label id="lblsuccess" class="text-success" style="display: none;">
+        </label>
+
+        <form id="addForm">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-7">
+
+                    <input type="text" onkeyup="toggleButton(this, 'submit')" class="form-control" id="item">
+                </div>
+
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <input type="submit" class="btn btn-dark" id="submit" value="Submit" disabled>
+                </div>
+            </div>
+        </form>
+
+        <br>
+
+        <form id="addForm">
+            <ul class="list-group" id="items"></ul>
+
+        </form>
+
+        <br>
+        <br>
+        <h3 style="font-family: 'Courier New', Courier, monospace;">Take a Screenshot.</h3>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    
+</body>
+
+</html>
